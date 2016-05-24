@@ -1,6 +1,5 @@
 TARGET = Benchmark
-TESTLIBSPATH = ../libpath/
-INCSPATH = -I../include/
+INCSPATH = $(join -I,$(dir $(TESTINCSPATH)))
 
 LIBS = $(wildcard $(addprefix $(dir $(TESTLIBSPATH)), *.o))
 UPCC = upcc

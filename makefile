@@ -1,3 +1,6 @@
+export FIRSTDIR := $(abspath $(lastword $(MAKEFILE_LIST)))
+export TESTLIBSPATH = $(join $(dir $(FIRSTDIR)) ,libpath/)
+export TESTINCSPATH = $(join $(dir $(FIRSTDIR)) ,include/)
 
 
 SUBDIRS = bench tests
@@ -17,4 +20,9 @@ bench: tests
 
 
 clean:
-	$(MAKE) clean -C $(SUBDIRS)
+	-for d in $(SUBDIRS); do (cd $$d; $(MAKE) clean ); done
+
+test:
+	@echo $(dir $(FIRSTDIR))
+	@echo $(dir $(TESTLIBSPATH))
+	@echo $(dir $(TESTINCSPATH))

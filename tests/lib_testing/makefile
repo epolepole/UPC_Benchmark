@@ -1,9 +1,6 @@
 LIBS = 
 UPCC = upcc
 UPCFLAGS = -g
-TESTLIBSPATH = ../../libpath/
-TESTINCSPATH = ../../include/
-
 
 .PHONY: default all clean
 

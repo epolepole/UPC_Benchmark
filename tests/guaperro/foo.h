@@ -1,0 +1,4 @@
+//foo.h
+
+
+int bar();
