@@ -3,7 +3,7 @@ INCSPATH = $(join -I,$(dir $(TESTINCSPATH)))
 
 LIBS = $(wildcard $(addprefix $(dir $(TESTLIBSPATH)), *.o))
 UPCC = upcc
-UPCFLAGS = -g
+UPCFLAGS = 
 
 OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
 HEADERS = $(wildcard *.h)

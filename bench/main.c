@@ -1,43 +1,68 @@
-#include "t1.h"
+#include "t2.h"
 #include <time.h>
 #include <float.h>
+#include <upc.h>
 
 //http://stackoverflow.com/questions/5248915/execution-time-of-c-program
-clock_t begin, end;
-double time_spent;
+shared clock_t begin, end;
+shared double time_spent;
 
-double time_min = DBL_MAX;
-double time_max = 0;
-double time_av = 0;
-double time_sum = 0;
+static shared double time_min = DBL_MAX;
+static shared double time_max = 0;
+static shared double time_av = 0;
+static shared double time_sum = 0;
 
-int n_iter = 1;
+static shared int n_iter = 100;
 
 void checkTimes(double time_spent);
 
 
-
-
 int main(int argc, const char * argv[]) {
 	
-	if (argc == 2)
-		n_iter = atoi(argv[1]);
+	if (MYTHREAD == 0) {
+		if (argc == 2)
+			n_iter = atoi(argv[1]);	
+	}
+
+	upc_barrier;
 	init();
+	upc_barrier;
+
 	for (int i = 0; i<N_Tests; ++i) {
-		if (MYTHREAD == 0)
+
+		if (MYTHREAD == 0){
 			printf("Starting test %i\n", i);
+			time_min = DBL_MAX;
+			time_max = 0;
+			time_av = 0;
+			time_sum = 0;
+		}
+		upc_barrier;
+
 		for (int j = 0; j < n_iter; j++) {
-			if (MYTHREAD == 0)
+
+
+			if (MYTHREAD == 0) {
+				//printf("Begin iteration number %i\n", j);
 				begin = clock();
+			}
+			upc_barrier;
+
 			test_functions[i]();
+
+			upc_barrier;
+
 			if (MYTHREAD == 0) {
 				end = clock();
 				time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 				time_sum += time_spent;
+				checkTimes(time_spent);
 			}
+			upc_barrier;
 		}
+
 		if (MYTHREAD == 0) {
-			checkTimes(time_spent);
+
 			time_av = time_sum/n_iter;
 			printf("Test ended, the results are:\n");
 
@@ -45,6 +70,7 @@ int main(int argc, const char * argv[]) {
 			printf("	Time min = %f\n",time_min);
 			printf("	Time average = %f\n",time_av);
 		}
+		upc_barrier;
 	}
 
 	return 0;

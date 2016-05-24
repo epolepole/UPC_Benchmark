@@ -1,6 +1,6 @@
 LIBS = 
 UPCC = upcc
-UPCFLAGS = -g
+UPCFLAGS = 
 
 .PHONY: default all clean
 

@@ -6,7 +6,7 @@
 
 void test_text(int num);
 
-void init();
+vvoid init();
 
 void Test1();
 void Test2();

@@ -4,7 +4,7 @@
 #define N 100*THREADS
 #define N_Tests 2
 
-void test_text(int num);
+static void test_text(int num);
 
 void init();
 
