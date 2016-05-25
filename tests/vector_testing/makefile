@@ -3,7 +3,7 @@ LIBS =
 UPCC = upcc
 UPCFLAGS = 
 
-.PHONY: default all clean
+.PHONY: default all clean test
 
 default: $(TARGET)
 all: default

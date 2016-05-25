@@ -1,11 +1,11 @@
 export FIRSTDIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 export TESTLIBSPATH = $(join $(dir $(FIRSTDIR)) ,libpath/)
 export TESTINCSPATH = $(join $(dir $(FIRSTDIR)) ,include/)
-
+export FOLDER_TEST_NAME = $(T)
 
 SUBDIRS = bench tests
 
-.PHONY: subdirs $(SUBDIRS)
+.PHONY: subdirs $(SUBDIRS) test
 
 default: subdirs
 all: default
@@ -21,8 +21,12 @@ bench: tests
 
 clean:
 	-for d in $(SUBDIRS); do (cd $$d; $(MAKE) clean ); done
+	rm -fr $(TESTLIBSPATH)*
+	rm -fr $(TESTINCSPATH)*
 
 test:
 	@echo $(dir $(FIRSTDIR))
 	@echo $(dir $(TESTLIBSPATH))
 	@echo $(dir $(TESTINCSPATH))
+
+	-for d in $(SUBDIRS); do (cd $$d; $(MAKE) test ); done

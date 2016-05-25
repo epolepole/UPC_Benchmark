@@ -1,14 +1,19 @@
-SUBDIRS = $(wildcard */.)
-#SUBDIRS=vector_testing/.
-.PHONY: default subdirs $(SUBDIRS)
+#SUBDIRS = $(wildcard */.)
+SUBDIRS = $(addsuffix /, $(FOLDER_TEST_NAME))
+#T = test folder name
+
+.PHONY: default subdirs $(SUBDIRS) test
 
 default: subdirs
 all: default
 
 subdirs: $(SUBDIRS)
 
-$(SUBDIRS):
+$(SUBDIRS): clean
 	$(MAKE) -C $@
+
+test:	
+	-for d in $(SUBDIRS); do (cd $$d; $(MAKE) test ); done
 
 clean:
 	echo $(SUBDIRS)
