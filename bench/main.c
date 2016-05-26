@@ -12,7 +12,7 @@ static shared double time_max = 0;
 static shared double time_av = 0;
 static shared double time_sum = 0;
 
-static shared int n_iter = 100;
+static shared int n_iter = 1000;
 
 void checkTimes(double time_spent);
 
