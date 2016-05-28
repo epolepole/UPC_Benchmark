@@ -1,6 +1,6 @@
 #include "t1.h"
 
-void init() {
+void init(int argc, const char *argv[]) {
 	test_functions[0] = Test1;
 	test_functions[1] = Test2;
 }

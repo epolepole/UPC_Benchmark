@@ -25,13 +25,14 @@ int main(int argc, const char * argv[]) {
 	}
 
 	upc_barrier;
-	init();
+	init(2,NULL);
 	upc_barrier;
 
 	for (int i = 0; i<N_Tests; ++i) {
 
 		if (MYTHREAD == 0){
 			printf("Starting test %i\n", i);
+			printf("%s\n",test_names[i]);
 			time_min = DBL_MAX;
 			time_max = 0;
 			time_av = 0;
@@ -43,7 +44,7 @@ int main(int argc, const char * argv[]) {
 
 
 			if (MYTHREAD == 0) {
-				//printf("Begin iteration number %i\n", j);
+				printf("Begin iteration number %i\n", j);
 				begin = clock();
 			}
 			upc_barrier;

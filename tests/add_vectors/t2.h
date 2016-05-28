@@ -4,7 +4,7 @@
 #define N 10000*THREADS
 #define N_Tests 2
 
-void init();
+void init(int argc, const char *argv[]);
 
 void Test1();
 void Test2();

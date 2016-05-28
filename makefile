@@ -1,9 +1,10 @@
 export FIRSTDIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 export TESTLIBSPATH = $(join $(dir $(FIRSTDIR)) ,libpath/)
 export TESTINCSPATH = $(join $(dir $(FIRSTDIR)) ,include/)
+T = mult_matrices
 
 export FOLDER_TEST_NAME = $(T)
-export UPCFLAGS
+export UPCFLAGS = -T 4 -g
 
 SUBDIRS = bench tests
 

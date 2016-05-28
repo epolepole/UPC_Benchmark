@@ -1,6 +1,6 @@
 LIBS = 
 UPCC = upcc
-UPCFLAGS = -T 4
+UPCFLAGS =
 
 .PHONY: default all clean
 
@@ -20,7 +20,7 @@ test:
 	@echo $(HEADERS)
 	@echo $(HEAD_DEST)
 
-$(HEAD_DEST): $(HEADERS) clean
+$(HEAD_DEST): $(HEADERS)
 	cp $^ $(HEAD_DEST)
 
 
