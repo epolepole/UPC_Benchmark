@@ -1,5 +1,6 @@
 
-#include "bench.h"
+#include "mult_mat.h"
+#include "T.h"
 
 int *col_ptr;
 int temp;
@@ -38,7 +39,7 @@ void init(int argc, const char *argv[]) {
     }
 
     upc_barrier;
-    //pAB = &AB[0];
+    pAB = &AB[0][0];
     upc_barrier;
 
 
@@ -64,7 +65,7 @@ void Test1() {
                 temp = temp + row_ptr[j][k] * col_ptr[k];
             }
             
-            AB[i][j] = temp;
+            pAB[i*THREADS + j] = temp;
         }	
     }
     upc_barrier;
@@ -96,7 +97,7 @@ void Test3() {
             
             for (int k = 0; k < THREADS; ++k)
             {
-                temp = temp + row_ptr[j][k] * B[k][i];
+                temp = temp + A[j][k] * B[k][i];
             }
             
             AB[i][j] = temp;

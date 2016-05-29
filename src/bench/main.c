@@ -44,7 +44,7 @@ int main(int argc, const char * argv[]) {
 
 
 			if (MYTHREAD == 0) {
-				printf("Begin iteration number %i\n", j);
+				//printf("Begin iteration number %i\n", j);
 				begin = clock();
 			}
 			upc_barrier;
