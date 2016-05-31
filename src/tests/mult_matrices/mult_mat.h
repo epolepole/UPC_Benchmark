@@ -5,12 +5,22 @@
 #include <upc.h>
 
 
-typedef shared int* shared_int_ptr;
-typedef shared int* shared shared_int_shared_ptr;
+#define MULTIPLICATION_FACTOR 3
+#define SIZE THREADS*MULTIPLICATION_FACTOR
 
-shared int A[THREADS][THREADS], B[THREADS][THREADS], AB[THREADS][THREADS];
-shared_int_ptr row_ptr[THREADS];
+typedef shared int* shared_int_ptr;
+
+
+int A_local[SIZE][SIZE], B_local[SIZE][SIZE], AB_local[SIZE][SIZE];
+
+
+shared int A[SIZE][SIZE], B[SIZE][SIZE], AB[SIZE][SIZE];
+
+
+shared_int_ptr row_ptr[MULTIPLICATION_FACTOR*SIZE];
+shared_int_ptr pB;
 shared_int_ptr pAB;
+int *col_ptr;
 
 
 #endif // __BENCH_H_

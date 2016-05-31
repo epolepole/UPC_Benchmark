@@ -4,12 +4,13 @@
 #include <stdio.h>
 #include <upc.h>
 
-#define N_Tests 3
+#define N_Tests 4
 
 void init(int argc, const char *argv[]);
 void Test1();
 void Test2();
 void Test3();
+void Test4();
 
 typedef void(*function_ptr)();
 

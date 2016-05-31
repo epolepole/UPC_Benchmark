@@ -22,6 +22,12 @@ int main(int argc, const char * argv[]) {
 	if (MYTHREAD == 0) {
 		if (argc == 2)
 			n_iter = atoi(argv[1]);	
+		printf("\n\n\n\
+			*****************************************************\n\
+			*                                                   *\n\
+			*                   Testing TIME!                   *\n\
+			*                                                   *\n\
+			*****************************************************\n\n\n");
 	}
 
 	upc_barrier;
@@ -31,7 +37,7 @@ int main(int argc, const char * argv[]) {
 	for (int i = 0; i<N_Tests; ++i) {
 
 		if (MYTHREAD == 0){
-			printf("Starting test %i\n", i);
+			printf("\n    ***Starting test %i***\n", i);
 			printf("%s\n",test_names[i]);
 			time_min = DBL_MAX;
 			time_max = 0;

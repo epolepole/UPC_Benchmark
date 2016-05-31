@@ -6,6 +6,7 @@ cmake_minimum_required (VERSION 2.6)
 project (Benchmark)
 
 set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
@@ -22,9 +23,9 @@ set(CMAKE_C_FLAGS_DEBUG "-T ${THREADS} -g")
 set(CMAKE_C_FLAGS_RELEASE "-T ${THREADS}")
 
 
-if(NOT DEFINED ${TEST_TO_RUN})	
+if(NOT DEFINED TEST_TO_RUN)	
 	set(TEST_TO_RUN mult_matrices)
-endif(NOT DEFINED ${TEST_TO_RUN})
+endif(NOT DEFINED TEST_TO_RUN)
 
 include(CheckCSourceCompiles)
 include(CheckCSourceRuns)
