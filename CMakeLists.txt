@@ -1,11 +1,11 @@
 #CMakeLists.txt
-
+message(STATUS "Starting Project")
 set(CMAKE_C_COMPILER upcc)
 
 cmake_minimum_required (VERSION 2.6)
 project (Benchmark)
 
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")

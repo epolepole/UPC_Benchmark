@@ -6,6 +6,9 @@
 //http://stackoverflow.com/questions/5248915/execution-time-of-c-program
 shared clock_t begin, end;
 shared double time_spent;
+time_t timer;
+char buffer[26];
+struct tm* tm_info; 
 
 static shared double time_min = DBL_MAX;
 static shared double time_max = 0;
@@ -22,12 +25,19 @@ int main(int argc, const char * argv[]) {
 	if (MYTHREAD == 0) {
 		if (argc == 2)
 			n_iter = atoi(argv[1]);	
+		time(&timer);
+		tm_info = localtime(&timer);
+		strftime(buffer , 26 , "%Y:%m:%d %H:%M:%S", tm_info);
+
+		printf("\n\n\n*************************************************************************\n");
+		printf("\n Time: %s\n\n",buffer);
 		printf("\n\n\n\
 			*****************************************************\n\
 			*                                                   *\n\
 			*                   Testing TIME!                   *\n\
 			*                                                   *\n\
 			*****************************************************\n\n\n");
+		printf("Runing %i iterations per test\n\n",n_iter);
 	}
 
 	upc_barrier;
@@ -37,8 +47,8 @@ int main(int argc, const char * argv[]) {
 	for (int i = 0; i<N_Tests; ++i) {
 
 		if (MYTHREAD == 0){
-			printf("\n    ***Starting test %i***\n", i);
-			printf("%s\n",test_names[i]);
+			//printf("\n    ***Starting test %i***\n", i);
+			printf("\n%s\n\n",test_names[i]);
 			time_min = DBL_MAX;
 			time_max = 0;
 			time_av = 0;
@@ -71,7 +81,7 @@ int main(int argc, const char * argv[]) {
 		if (MYTHREAD == 0) {
 
 			time_av = time_sum/n_iter;
-			printf("Test ended, the results are:\n");
+			//printf("Test ended, the results are:\n");
 
 			printf("	Time max = %f\n",time_max);
 			printf("	Time min = %f\n",time_min);
@@ -79,6 +89,10 @@ int main(int argc, const char * argv[]) {
 		}
 		upc_barrier;
 	}
+
+	upc_barrier;
+	end_test();
+	upc_barrier;
 
 	return 0;
 }

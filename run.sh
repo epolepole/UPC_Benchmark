@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cd build/bin
-upcrun Benchmark 10000
+upcrun -shared-heap 2GB -q Benchmark 100 >> ../../output/results.txt
+#upcrun -freeze=0 Benchmark 100
