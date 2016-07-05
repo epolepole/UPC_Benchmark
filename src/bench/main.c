@@ -5,6 +5,7 @@
 
 //http://stackoverflow.com/questions/5248915/execution-time-of-c-program
 shared clock_t begin, end;
+shared clock_t begin_t, end_t;
 shared double time_spent;
 time_t timer;
 char buffer[26];
@@ -14,8 +15,10 @@ static shared double time_min = DBL_MAX;
 static shared double time_max = 0;
 static shared double time_av = 0;
 static shared double time_sum = 0;
+static shared double time_total = 0;
+static shared double time_av_2 = 0;
 
-static shared int n_iter = 1000;
+static shared int n_iter = 10000;
 
 void checkTimes(double time_spent);
 
@@ -44,6 +47,7 @@ int main(int argc, const char * argv[]) {
 	init(2,NULL);
 	upc_barrier;
 
+
 	for (int i = 0; i<N_Tests; ++i) {
 
 		if (MYTHREAD == 0){
@@ -53,6 +57,13 @@ int main(int argc, const char * argv[]) {
 			time_max = 0;
 			time_av = 0;
 			time_sum = 0;
+			time_total = 0;
+			time_av_2 = 0;
+			
+			begin_t = clock();
+			printf("	begin_t = %f\n    clock = %f\n",begin_t,clock());
+			//begin_t = time(NULL);
+
 		}
 		upc_barrier;
 
@@ -62,6 +73,7 @@ int main(int argc, const char * argv[]) {
 			if (MYTHREAD == 0) {
 				//printf("Begin iteration number %i\n", j);
 				begin = clock();
+				//begin = time(NULL);
 			}
 			upc_barrier;
 
@@ -71,21 +83,36 @@ int main(int argc, const char * argv[]) {
 
 			if (MYTHREAD == 0) {
 				end = clock();
-				time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+				//end = time(NULL);
+				//time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+				time_spent = (double)(end - begin)/CLOCKS_PER_SEC;
 				time_sum += time_spent;
 				checkTimes(time_spent);
 			}
 			upc_barrier;
 		}
+		upc_barrier;
 
 		if (MYTHREAD == 0) {
+			end_t = clock();
+			//end_t = time(NULL);
+			//time_total = (double)(end_t - begin_t) / CLOCKS_PER_SEC;
+			time_total = (double)(end_t - begin_t)/CLOCKS_PER_SEC;
 
+			time_av_2 = time_total/n_iter;
 			time_av = time_sum/n_iter;
 			//printf("Test ended, the results are:\n");
+			
+			printf("	Clocks per second = %i\n\n",CLOCKS_PER_SEC);
+
 
 			printf("	Time max = %f\n",time_max);
 			printf("	Time min = %f\n",time_min);
-			printf("	Time average = %f\n",time_av);
+			printf("	Time average 1= %f\n\n",time_av);
+
+
+			printf("	Time total = %f\n",time_total);
+			printf("	Time average 2= %f\n",time_av_2);
 		}
 		upc_barrier;
 	}
