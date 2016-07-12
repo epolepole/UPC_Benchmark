@@ -18,7 +18,7 @@ static shared double time_sum = 0;
 static shared double time_total = 0;
 static shared double time_av_2 = 0;
 
-static shared int n_iter = 10000;
+static shared int n_iter = 500000;
 
 void checkTimes(double time_spent);
 
