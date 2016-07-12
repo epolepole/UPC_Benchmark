@@ -61,7 +61,7 @@ int main(int argc, const char * argv[]) {
 			time_av_2 = 0;
 			
 			begin_t = clock();
-			printf("	begin_t = %f\n    clock = %f\n",begin_t,clock());
+			//printf("	begin_t = %f\n    clock = %f\n",begin_t,clock());
 			//begin_t = time(NULL);
 
 		}
@@ -103,16 +103,16 @@ int main(int argc, const char * argv[]) {
 			time_av = time_sum/n_iter;
 			//printf("Test ended, the results are:\n");
 			
-			printf("	Clocks per second = %i\n\n",CLOCKS_PER_SEC);
+			//printf("	Clocks per second = %i\n\n",CLOCKS_PER_SEC);
 
 
-			printf("	Time max = %f\n",time_max);
-			printf("	Time min = %f\n",time_min);
-			printf("	Time average 1= %f\n\n",time_av);
+			//printf("	Time max = %f\n",time_max);
+			//printf("	Time min = %f\n",time_min);
+			//printf("	Time average 1= %f\n\n",time_av);
 
 
 			printf("	Time total = %f\n",time_total);
-			printf("	Time average 2= %f\n",time_av_2);
+			printf("	Time average = %f\n",time_av_2);
 		}
 		upc_barrier;
 	}
