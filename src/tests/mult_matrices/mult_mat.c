@@ -97,9 +97,9 @@ void local_definition() {
 void dynamic_allocation() {
     //Dynamic allocation
     upc_barrier;
-    dA = (shared [BLOCKING_FACTOR] int*) upc_all_alloc(n_blocks, n_blocks*sizeof(int));
-    dB = (shared [BLOCKING_FACTOR] int*) upc_all_alloc(n_blocks, n_blocks*sizeof(int));
-    dAB = (shared [BLOCKING_FACTOR] int*) upc_all_alloc(n_blocks, n_blocks*sizeof(int));
+    dA = (shared [BLOCKING_FACTOR] int*) upc_all_alloc(n_blocks, sizeof(int));
+    dB = (shared [BLOCKING_FACTOR] int*) upc_all_alloc(n_blocks, sizeof(int));
+    dAB = (shared [BLOCKING_FACTOR] int*) upc_all_alloc(n_blocks, sizeof(int));
 
 }
 

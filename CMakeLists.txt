@@ -35,6 +35,12 @@ if(NOT DEFINED TEST_TO_RUN)
 	set(TEST_TO_RUN mult_matrices)
 endif(NOT DEFINED TEST_TO_RUN)
 
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -network=mpi")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -network=mpi")
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
+
 include(CheckCSourceCompiles)
 include(CheckCSourceRuns)
 include(CheckFunctionExists)
