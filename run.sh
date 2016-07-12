@@ -1,6 +1,9 @@
 #!/bin/bash
 
 cd build/bin
-#upcrun -q Benchmark 1000 >> ../../output/results.txt
-upcrun -q Benchmark 10000 
-#upcrun -freeze=0 Benchmark 100
+if [ $1 == "R" ] ; then
+	upcrun Benchmark $2 
+else
+	upcrun -q -backtrace -freeze=0 Benchmark $2
+fi
+cd ../../

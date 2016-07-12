@@ -1,11 +1,17 @@
 #CMakeLists.txt
+cmake_minimum_required (VERSION 2.6)
+
 message(STATUS "Starting Project")
+
+
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
-message(STATUS  "Lets see what we have here${CMAKE_SHARED_LIBRARY_LINK_C_FLAGS}")
+message(STATUS  "Lets see what we have here ${CMAKE_SHARED_LIBRARY_LINK_C_FLAGS}")
 set(CMAKE_C_COMPILER upcc)
 
-cmake_minimum_required (VERSION 2.6)
 project (Benchmark)
+
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/build/bin")
+set(CMAKE_BINARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build")
 
 #set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -15,8 +21,8 @@ set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
 
 
 if(NOT DEFINED THREADS)
-	set(THREADS 8)
-	message(STATUS "Setting 8 threads")
+	set(THREADS 16)
+	message(STATUS "Setting 16 threads")
 endif(NOT DEFINED THREADS)
 
 message(STATUS "Compiling for ${THREADS} threads")
@@ -38,6 +44,7 @@ include(CheckLibraryExists)
 include(CheckSymbolExists)
 include(CheckTypeSize)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory (src)
 
