@@ -1,0 +1,44 @@
+*************************************************************************
+
+ Time: 2016:07:12 12:03:20
+
+
+
+
+                        *****************************************************
+                        *                                                   *
+                        *                   Testing TIME!                   *
+                        *                                                   *
+                        *****************************************************
+
+
+Runing 100000 iterations per test
+
+using 16 threads
+
+Matrix size = 128 x 128
+
+Shared memory, accessed with private to shared pointers. Full matrix pointer for B
+
+        Time total = 118.160000
+        Time average = 0.001182
+
+Shared memory, accessed with private to shared pointers. Single column pointer for B
+
+        Time total = 61.920000
+        Time average = 0.000619
+
+Shared memory, accessed with array
+
+        Time total = 199.220000
+        Time average = 0.001992
+
+Local memory
+
+        Time total = 16.480000
+        Time average = 0.000165
+
+Dynamic shared allocation, accessed with array
+
+        Time total = 132.540000
+        Time average = 0.001325
