@@ -11,11 +11,11 @@ threads=$2
 fi
 
 if [ $1 == "R" ] ; then
-    cmake .. -DTEST_TO_RUN=mult_matrices -DTHREADS=$threads -DCMAKE_VERBOSE_MAKEFILE=OFF -DCMAKE_BUILD_TYPE=Release
+    cmake .. -DTEST_TO_RUN=affinity_vs_T -DTHREADS=$threads -DCMAKE_VERBOSE_MAKEFILE=OFF -DCMAKE_BUILD_TYPE=Release
     make
 else    
     echo Debugging
-    cmake .. -DTEST_TO_RUN=mult_matrices -DTHREADS=$threads -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Debug
+    cmake .. -DTEST_TO_RUN=affinity_vs_T -DTHREADS=$threads -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Debug
     make verbose=1
 fi
 
