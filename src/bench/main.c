@@ -40,7 +40,7 @@ int main(int argc, const char * argv[]) {
 			*                   Testing TIME!                   *\n\
 			*                                                   *\n\
 			*****************************************************\n\n\n");
-		printf("Runing %i iterations per test\n\n",n_iter);
+		printf("Running %i iterations per test\n\n",n_iter);
 	}
 
 	upc_barrier;
